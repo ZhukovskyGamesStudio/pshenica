@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +8,11 @@ public class Game : MonoBehaviour {
     public int startButtonsLevel;
 
     [Header("Parameters")]
-    public Transform CloudsPanel;
-
     public Transform ListsPanel;
+
+    [SerializeField]
+    private RectTransform _canvas;
+
     public Sprite[] upgradeSprites;
 
     public Button[] buttons_1;
@@ -26,9 +27,6 @@ public class Game : MonoBehaviour {
     public Sprite[] halfBookSprites;
     public Sprite[] finishedBookSprites;
 
-    public GameObject[] Clouds;
-
-    List<GameObject> cloudsObj;
     public GameObject hook;
     Vector2 hookPos;
     public GameObject curBook;
@@ -67,8 +65,6 @@ public class Game : MonoBehaviour {
         CheckLvl();
 
         StartCoroutine(HookHay());
-        StartCoroutine(MoveClounds());
-
         Upgrade(0);
         Upgrade(1);
         Upgrade(2);
@@ -124,6 +120,10 @@ public class Game : MonoBehaviour {
         for (int i = 0; i < hay.Length; i++) {
             if (!hay[i].activeSelf) {
                 hay[i].SetActive(true);
+
+                Vector3 pos = hay[i].transform.localPosition;
+                pos.x = Random.Range(-1, 1f) * _canvas.rect.width * 0.45f;
+                hay[i].transform.localPosition = pos;
                 toGrew--;
                 if (toGrew == 0)
                     break;
@@ -271,36 +271,6 @@ public class Game : MonoBehaviour {
             UpgradeHayButton.SetActive(false);
             UpgradeButtonsButton.SetActive(false);
             UpgradeBookButton.SetActive(false);
-        }
-    }
-
-    IEnumerator MoveClounds() {
-        cloudsObj = new List<GameObject>();
-        ;
-        float pixPerFrame = 0.2f;
-        float untilNextCloud = 0;
-        while (true) {
-            if (untilNextCloud <= 0) {
-                untilNextCloud = 15;
-                GameObject cloud = Instantiate(Clouds[Random.Range(0, Clouds.Length)],
-                    Vector2.left * 1.5f + Vector2.up * Random.Range(-0.25f, 0.5f), Quaternion.identity, CloudsPanel);
-                if (Random.Range(0, 5) != 0)
-                    cloud.transform.SetAsFirstSibling();
-                if (cloudsObj.Count > 0) {
-                    GameObject b = cloudsObj[0];
-                    cloudsObj.Remove(b);
-                    Destroy(b);
-                }
-
-                cloudsObj.Add(cloud);
-            }
-
-            for (int i = 0; i < cloudsObj.Count; i++) {
-                cloudsObj[i].transform.position += Vector3.right * pixPerFrame * Time.deltaTime;
-            }
-
-            untilNextCloud -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
         }
     }
 
