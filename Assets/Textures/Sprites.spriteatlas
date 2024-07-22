@@ -53,6 +53,7 @@ SpriteAtlas:
     - ffb90400c8dcaeb408ccfbb4667f897c: 21300000
     - 686a54b0ccb9b5c488c58cf937a1e0db: 21300000
     - 60c25dc02f64ac547b81bf9e81561373: 21300000
+    - 1f42b5613f2c3f741bba9e4ebc954f18: 21300000
     - fcd776816e84c0c489547e66d7a36bc4: 21300000
     - c4a7d7816ed22ff449a1af314bfa243d: 21300000
     - 3f664ff18c1f4394aadcac6534b898c7: 21300000
@@ -96,6 +97,7 @@ SpriteAtlas:
     - e6edc0cc244d81e4c866483ca3537560: 1592625963
     - 8dee432d9c1dafe429e062d0183a6ec0: 21300000
     - ce50607dfcac71e48b03704f7a10047d: 21300000
+    - fdc2a5aea06886f4b88417acde8af2df: 21300000
     - 0835f4fe465bc7c49b5798109f9c037e: 21300000
     - 8642f76fef649414d88ef24fa748b021: 21300000
   m_MasterAtlas: {fileID: 0}
@@ -103,6 +105,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ffb90400c8dcaeb408ccfbb4667f897c, type: 3}
   - {fileID: 21300000, guid: 686a54b0ccb9b5c488c58cf937a1e0db, type: 3}
   - {fileID: 21300000, guid: 60c25dc02f64ac547b81bf9e81561373, type: 3}
+  - {fileID: 21300000, guid: 1f42b5613f2c3f741bba9e4ebc954f18, type: 3}
   - {fileID: 21300000, guid: fcd776816e84c0c489547e66d7a36bc4, type: 3}
   - {fileID: 21300000, guid: c4a7d7816ed22ff449a1af314bfa243d, type: 3}
   - {fileID: 21300000, guid: 3f664ff18c1f4394aadcac6534b898c7, type: 3}
@@ -146,12 +149,14 @@ SpriteAtlas:
   - {fileID: 1592625963, guid: e6edc0cc244d81e4c866483ca3537560, type: 3}
   - {fileID: 21300000, guid: 8dee432d9c1dafe429e062d0183a6ec0, type: 3}
   - {fileID: 21300000, guid: ce50607dfcac71e48b03704f7a10047d, type: 3}
+  - {fileID: 21300000, guid: fdc2a5aea06886f4b88417acde8af2df, type: 3}
   - {fileID: 21300000, guid: 0835f4fe465bc7c49b5798109f9c037e, type: 3}
   - {fileID: 21300000, guid: 8642f76fef649414d88ef24fa748b021, type: 3}
   m_PackedSpriteNamesToIndex:
   - hook
   - paper_1_1
   - cloud_0
+  - soundIcon
   - paper_3
   - back
   - paper_0
@@ -195,6 +200,7 @@ SpriteAtlas:
   - keyboard_2_1
   - paper_1
   - paper_4_2
+  - whiteBtn
   - wheat_2
   - paper_1_2
   m_RenderDataMap: {}

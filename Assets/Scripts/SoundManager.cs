@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour {
     public static SoundManager Instance;
@@ -7,8 +8,16 @@ public class SoundManager : MonoBehaviour {
     [SerializeField]
     private AudioSource _buttonSource, _upgradeSource, _growthSource, _collectSource, _writeProgressSource;
 
+    [SerializeField]
+    private Slider _volumeSlider;
+    
     private void Awake() {
         Instance = this;
+        UpdateVolume(_volumeSlider.value);
+    }
+
+    public void UpdateVolume(float percent) {
+        AudioListener.volume = percent;
     }
 
     public void PlaySound(Sounds type) {
