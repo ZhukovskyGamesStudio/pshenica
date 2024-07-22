@@ -940,6 +940,7 @@ GameObject:
   - component: {fileID: 195438956}
   - component: {fileID: 195438959}
   - component: {fileID: 195438960}
+  - component: {fileID: 195438961}
   m_Layer: 0
   m_Name: hay 1 (13)
   m_TagString: Untagged
@@ -963,9 +964,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -180.5, y: -99.5}
+  m_AnchoredPosition: {x: -180.5, y: -442.99997}
   m_SizeDelta: {x: 307, y: 687}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &195438956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1050,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 195438961}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &195438960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,6 +1081,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &195438961
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195438954}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &199405730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1584,7 @@ GameObject:
   - component: {fileID: 237367962}
   - component: {fileID: 237367965}
   - component: {fileID: 237367966}
+  - component: {fileID: 237367967}
   m_Layer: 0
   m_Name: hay 1 (6)
   m_TagString: Untagged
@@ -1588,9 +1608,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104, y: -29.5}
+  m_AnchoredPosition: {x: 104, y: -372.99997}
   m_SizeDelta: {x: 304, y: 687}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &237367962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,6 +1694,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 237367967}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &237367966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,6 +1725,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &237367967
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237367960}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &249868389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1904,6 +1942,7 @@ GameObject:
   - component: {fileID: 382818562}
   - component: {fileID: 382818565}
   - component: {fileID: 382818566}
+  - component: {fileID: 382818567}
   m_Layer: 0
   m_Name: hay 1 (5)
   m_TagString: Untagged
@@ -1927,9 +1966,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.5, y: -29.5}
+  m_AnchoredPosition: {x: 6.5, y: -372.99997}
   m_SizeDelta: {x: 311, y: 687}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &382818562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2013,6 +2052,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 382818567}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &382818566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,6 +2083,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &382818567
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382818560}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &396698470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,6 +2113,7 @@ GameObject:
   - component: {fileID: 396698472}
   - component: {fileID: 396698475}
   - component: {fileID: 396698476}
+  - component: {fileID: 396698477}
   m_Layer: 0
   m_Name: hay 1 (12)
   m_TagString: Untagged
@@ -2079,9 +2137,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -235, y: -41}
+  m_AnchoredPosition: {x: -235, y: -383.99997}
   m_SizeDelta: {x: 306, y: 686}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &396698472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,6 +2223,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 396698477}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &396698476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2194,6 +2254,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &396698477
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396698470}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &444939523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2598,21 +2674,21 @@ MonoBehaviour:
   xpSlider: {fileID: 1982375397}
   xpNeeded: 040000000a000000140000002800000050000000a0000000fa000000f4010000ee020000e8030000dc050000d0070000b80b00008813000010270000
   hay:
-  - {fileID: 1335509394}
-  - {fileID: 1745033321}
-  - {fileID: 1534363545}
-  - {fileID: 382818560}
-  - {fileID: 237367960}
-  - {fileID: 1689461421}
-  - {fileID: 1839376617}
-  - {fileID: 2067937961}
-  - {fileID: 1453364211}
-  - {fileID: 1839574456}
-  - {fileID: 1804437910}
-  - {fileID: 1666300122}
-  - {fileID: 396698470}
-  - {fileID: 195438954}
-  - {fileID: 997043727}
+  - {fileID: 1335509399}
+  - {fileID: 1745033326}
+  - {fileID: 1534363550}
+  - {fileID: 382818565}
+  - {fileID: 237367965}
+  - {fileID: 1689461426}
+  - {fileID: 1839376622}
+  - {fileID: 2067937966}
+  - {fileID: 1453364216}
+  - {fileID: 1839574461}
+  - {fileID: 1804437915}
+  - {fileID: 1666300127}
+  - {fileID: 396698475}
+  - {fileID: 195438959}
+  - {fileID: 997043732}
   UpgradeHayButton: {fileID: 799565132}
   UpgradeButtonsButton: {fileID: 1990757592}
   UpgradeBookButton: {fileID: 1190053230}
@@ -3433,6 +3509,7 @@ GameObject:
   - component: {fileID: 997043729}
   - component: {fileID: 997043732}
   - component: {fileID: 997043733}
+  - component: {fileID: 997043734}
   m_Layer: 0
   m_Name: hay 1 (15)
   m_TagString: Untagged
@@ -3456,9 +3533,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -389, y: -87}
+  m_AnchoredPosition: {x: -389, y: -429.99994}
   m_SizeDelta: {x: 302, y: 686}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &997043729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3542,6 +3619,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 200
   distanceBorder: 0.15
+  _animation: {fileID: 997043734}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &997043733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3571,6 +3650,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &997043734
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997043727}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1108001790
 GameObject:
   m_ObjectHideFlags: 0
@@ -4434,6 +4529,7 @@ GameObject:
   - component: {fileID: 1335509396}
   - component: {fileID: 1335509399}
   - component: {fileID: 1335509400}
+  - component: {fileID: 1335509401}
   m_Layer: 0
   m_Name: hay
   m_TagString: Untagged
@@ -4457,9 +4553,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -338.5, y: -29.5}
+  m_AnchoredPosition: {x: -338.5, y: -372.99997}
   m_SizeDelta: {x: 307, y: 687}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1335509396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,6 +4639,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1335509401}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1335509400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4572,6 +4670,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1335509401
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335509394}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1360341221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4980,6 +5094,7 @@ GameObject:
   - component: {fileID: 1453364213}
   - component: {fileID: 1453364216}
   - component: {fileID: 1453364217}
+  - component: {fileID: 1453364218}
   m_Layer: 0
   m_Name: hay 1 (8)
   m_TagString: Untagged
@@ -5003,9 +5118,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 386.5, y: -41}
+  m_AnchoredPosition: {x: 386.5, y: -383.99997}
   m_SizeDelta: {x: 307, y: 686}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1453364213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5089,6 +5204,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1453364218}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1453364217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5118,6 +5235,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1453364218
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453364211}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1470547091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5278,6 +5411,7 @@ GameObject:
   - component: {fileID: 1534363547}
   - component: {fileID: 1534363550}
   - component: {fileID: 1534363551}
+  - component: {fileID: 1534363552}
   m_Layer: 0
   m_Name: hay 1 (2)
   m_TagString: Untagged
@@ -5301,9 +5435,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -154, y: -29.5}
+  m_AnchoredPosition: {x: -154, y: -372.99997}
   m_SizeDelta: {x: 308, y: 687}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1534363547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5387,6 +5521,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1534363552}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1534363551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5416,6 +5552,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1534363552
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534363545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1543919392
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,7 +5612,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4be47058ef2547248abf4828e3ae817e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5588,7 +5740,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 53ed7ce5a6d5b254fa30c227f597e5a0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6131,6 +6283,7 @@ GameObject:
   - component: {fileID: 1666300124}
   - component: {fileID: 1666300127}
   - component: {fileID: 1666300128}
+  - component: {fileID: 1666300129}
   m_Layer: 0
   m_Name: hay 1 (11)
   m_TagString: Untagged
@@ -6154,9 +6307,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 212.5, y: -93}
+  m_AnchoredPosition: {x: 212.5, y: -430}
   m_SizeDelta: {x: 307, y: 674}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1666300124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6240,6 +6393,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1666300129}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1666300128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6269,6 +6424,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1666300129
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666300122}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1689461421
 GameObject:
   m_ObjectHideFlags: 0
@@ -6283,6 +6454,7 @@ GameObject:
   - component: {fileID: 1689461423}
   - component: {fileID: 1689461426}
   - component: {fileID: 1689461427}
+  - component: {fileID: 1689461428}
   m_Layer: 0
   m_Name: hay 1 (4)
   m_TagString: Untagged
@@ -6306,9 +6478,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 154.5, y: -93}
+  m_AnchoredPosition: {x: 154.5, y: -430}
   m_SizeDelta: {x: 309, y: 674}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1689461423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6392,6 +6564,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1689461428}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1689461427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6421,6 +6595,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1689461428
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689461421}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1718205336
 GameObject:
   m_ObjectHideFlags: 0
@@ -6772,6 +6962,7 @@ GameObject:
   - component: {fileID: 1745033323}
   - component: {fileID: 1745033326}
   - component: {fileID: 1745033327}
+  - component: {fileID: 1745033328}
   m_Layer: 0
   m_Name: hay 1 (7)
   m_TagString: Untagged
@@ -6795,9 +6986,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 281, y: -35.5}
+  m_AnchoredPosition: {x: 281, y: -373}
   m_SizeDelta: {x: 316, y: 675}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1745033323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6881,6 +7072,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1745033328}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1745033327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6910,6 +7103,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1745033328
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745033321}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1803093941
 GameObject:
   m_ObjectHideFlags: 0
@@ -7014,6 +7223,7 @@ GameObject:
   - component: {fileID: 1804437912}
   - component: {fileID: 1804437915}
   - component: {fileID: 1804437916}
+  - component: {fileID: 1804437917}
   m_Layer: 0
   m_Name: hay 1 (10)
   m_TagString: Untagged
@@ -7037,9 +7247,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23, y: -82.5}
+  m_AnchoredPosition: {x: 23, y: -421}
   m_SizeDelta: {x: 306, y: 677}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1804437912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7123,6 +7333,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1804437917}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1804437916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7152,6 +7364,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1804437917
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804437910}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1839376617
 GameObject:
   m_ObjectHideFlags: 0
@@ -7166,6 +7394,7 @@ GameObject:
   - component: {fileID: 1839376619}
   - component: {fileID: 1839376622}
   - component: {fileID: 1839376623}
+  - component: {fileID: 1839376624}
   m_Layer: 0
   m_Name: hay 1 (1)
   m_TagString: Untagged
@@ -7189,9 +7418,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -266, y: -87}
+  m_AnchoredPosition: {x: -266, y: -429.99994}
   m_SizeDelta: {x: 308, y: 686}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1839376619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7275,6 +7504,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1839376624}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1839376623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7304,6 +7535,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1839376624
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839376617}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1839574456
 GameObject:
   m_ObjectHideFlags: 0
@@ -7318,6 +7565,7 @@ GameObject:
   - component: {fileID: 1839574458}
   - component: {fileID: 1839574461}
   - component: {fileID: 1839574462}
+  - component: {fileID: 1839574463}
   m_Layer: 0
   m_Name: hay 1 (9)
   m_TagString: Untagged
@@ -7341,9 +7589,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 386.5, y: -88.5}
+  m_AnchoredPosition: {x: 386.5, y: -420.99997}
   m_SizeDelta: {x: 307, y: 665}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1839574458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7427,6 +7675,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 1839574463}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &1839574462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7456,6 +7706,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &1839574463
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839574456}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1872846008
 GameObject:
   m_ObjectHideFlags: 0
@@ -7664,7 +7930,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 53ed7ce5a6d5b254fa30c227f597e5a0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8487,6 +8753,7 @@ GameObject:
   - component: {fileID: 2067937963}
   - component: {fileID: 2067937966}
   - component: {fileID: 2067937967}
+  - component: {fileID: 2067937968}
   m_Layer: 0
   m_Name: hay 1 (3)
   m_TagString: Untagged
@@ -8510,9 +8777,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -71, y: -87}
+  m_AnchoredPosition: {x: -71, y: -429.99994}
   m_SizeDelta: {x: 306, y: 686}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2067937963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8596,6 +8863,8 @@ MonoBehaviour:
   Game: {fileID: 519420030}
   forcePower: 100
   distanceBorder: 0.15
+  _animation: {fileID: 2067937968}
+  _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
 --- !u!114 &2067937967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8625,6 +8894,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!111 &2067937968
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067937961}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!850595691 &2070777950
 LightingSettings:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class Game : MonoBehaviour {
     public Slider xpSlider;
     public int[] xpNeeded;
 
-    public GameObject[] hay;
+    public Hay[] hay;
     int xp;
     int maxXp;
     int lvl;
@@ -118,8 +118,8 @@ public class Game : MonoBehaviour {
     public void GrewNewHay() {
         int toGrew = (curBooklvl + 1);
         for (int i = 0; i < hay.Length; i++) {
-            if (!hay[i].activeSelf) {
-                hay[i].SetActive(true);
+            if (!hay[i].gameObject.activeSelf) {
+                hay[i].Grow();
 
                 Vector3 pos = hay[i].transform.localPosition;
                 pos.x = Random.Range(-1, 1f) * _canvas.rect.width * 0.45f;
@@ -280,8 +280,8 @@ public class Game : MonoBehaviour {
 
     public void CollectHay() {
         for (int i = 0; i < hay.Length; i++) {
-            if (hay[i].activeSelf) {
-                hay[i].GetComponent<Hay>().StartCollecting();
+            if (hay[i].CanBeCollected) {
+                hay[i].StartCollecting();
             }
         }
     }
