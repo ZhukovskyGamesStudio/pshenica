@@ -89,7 +89,7 @@ public class Game : MonoBehaviour {
 
     public void ButtonPressed() {
         curButton++;
-
+        SoundManager.Instance.PlaySound(Sounds.Button);
         if (curButton == curButtons.Length) {
             curButton = 0;
             DropList();
@@ -129,6 +129,8 @@ public class Game : MonoBehaviour {
                     break;
             }
         }
+        
+        SoundManager.Instance.PlaySound(Sounds.Growth);
 
         if (toGrew > 0 && hook.activeSelf)
             StartCoroutine(HookHay());
@@ -165,6 +167,7 @@ public class Game : MonoBehaviour {
     void GetUpgradePoint() {
         haveUpgradePoints++;
 
+        SoundManager.Instance.PlaySound(Sounds.Collect);
         if (curHaylvl < 4)
             UpgradeHayButton.SetActive(true);
         if (curBooklvl < 4)
@@ -272,6 +275,7 @@ public class Game : MonoBehaviour {
             UpgradeButtonsButton.SetActive(false);
             UpgradeBookButton.SetActive(false);
         }
+        SoundManager.Instance.PlaySound(Sounds.Upgrade);
     }
 
     public void CollectHay() {
@@ -284,6 +288,8 @@ public class Game : MonoBehaviour {
 
     public void CollectXP() {
         xp += Mathf.FloorToInt(Mathf.Pow(2, curHaylvl));
+        
+        SoundManager.Instance.PlaySound(Sounds.Collect);
         CheckLvl();
     }
 
