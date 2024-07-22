@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Game : MonoBehaviour {
+    public static Game Instance;
+    public static MainGameConfig MainGameConfig;
+
+    [SerializeField]
+    private MainGameConfig _mainGameConfig;
+
     public int startHayLevel;
     public int startBookLevel;
     public int startButtonsLevel;
@@ -11,60 +18,54 @@ public class Game : MonoBehaviour {
     public Transform ListsPanel;
 
     [SerializeField]
-    private RectTransform _canvas;
+    private HayFactory _hayFactory;
+
+    [SerializeField]
+    private KeyboardButtonsController _keyboardButtonsController;
+
+    [SerializeField]
+    private Hook _hook;
 
     public Sprite[] upgradeSprites;
-
-    public Button[] buttons_1;
-    public Button[] buttons_2;
-    public Button[] buttons_3;
-    public Button[] buttons_4;
-    public Button[] buttons_5;
-    public Sprite[] haySprites;
 
     public GameObject[] books;
     public Sprite[] emptyBookSprites;
     public Sprite[] halfBookSprites;
     public Sprite[] finishedBookSprites;
-
-    public GameObject hook;
-    Vector2 hookPos;
+    
     public GameObject curBook;
-    Button[] curButtons;
     public Text lvlText;
     public Slider xpSlider;
-    public int[] xpNeeded;
 
-    public Hay[] hay;
-    int xp;
-    int maxXp;
-    int lvl;
+    int _xp;
+    int _maxXp;
+    int _lvl;
 
-    int curHaylvl;
-    int curBooklvl;
-    int curButtonslvl;
+    int _curHaylvl;
+    int _curBooklvl;
+    int _curButtonslvl;
 
     public GameObject UpgradeHayButton;
     public GameObject UpgradeButtonsButton;
     public GameObject UpgradeBookButton;
 
-    int curButton;
-    int haveUpgradePoints;
+    int _haveUpgradePoints;
+
+    private void Awake() {
+        Instance = this;
+        MainGameConfig = _mainGameConfig;
+    }
 
     private void Start() {
-        hookPos = hook.transform.position;
-        curButtons = buttons_1;
-        curButton = 0;
-        DisEnableButtons();
-        curHaylvl = startHayLevel - 1;
-        curBooklvl = startBookLevel - 1;
-        curButtonslvl = startButtonsLevel - 1;
-        xp = 0;
-        lvl = 0;
-        maxXp = xpNeeded[lvl];
+        _curHaylvl = startHayLevel - 1;
+        _curBooklvl = startBookLevel - 1;
+        _curButtonslvl = startButtonsLevel - 1;
+        _xp = 0;
+        _lvl = 0;
+        _maxXp = MainGameConfig.XpNeeded[_lvl];
         CheckLvl();
 
-        StartCoroutine(HookHay());
+        //StartCoroutine(HookHay());
         Upgrade(0);
         Upgrade(1);
         Upgrade(2);
@@ -72,13 +73,18 @@ public class Game : MonoBehaviour {
         UpgradeHayButton.SetActive(false);
         UpgradeButtonsButton.SetActive(false);
         UpgradeBookButton.SetActive(false);
-        haveUpgradePoints = 0;
+        _haveUpgradePoints = 0;
+        _keyboardButtonsController.SetUpgradeLevel(_curButtonslvl);
+        _keyboardButtonsController.OnLastButtonPressed += ButtonPressed;
+        _keyboardButtonsController.OnNextButtonPressed += OnButtonPressed;
+
+        _hook.OnHookCollectedHay += CollectHay;
     }
 
     void DropList() {
         GameObject list = Instantiate(curBook, ListsPanel);
         list.transform.SetAsFirstSibling();
-        list.GetComponent<Image>().sprite = finishedBookSprites[curBooklvl];
+        list.GetComponent<Image>().sprite = finishedBookSprites[_curBooklvl];
 
         Rigidbody2D rb = list.GetComponent<Rigidbody2D>();
         rb.simulated = true;
@@ -87,208 +93,125 @@ public class Game : MonoBehaviour {
         rb.AddTorque(Random.Range(-1f, 1f) * forcePower);
     }
 
-    public void ButtonPressed() {
-        curButton++;
-        SoundManager.Instance.PlaySound(Sounds.Button);
-        if (curButton == curButtons.Length) {
-            curButton = 0;
-            DropList();
-        }
-
-        DisEnableButtons();
-
-        if (curButton == 0)
-            curBook.GetComponent<Image>().sprite = emptyBookSprites[curBooklvl];
-        else if (curButton < curButtons.Length / 2)
-            curBook.GetComponent<Image>().sprite = halfBookSprites[curBooklvl];
-        else
-            curBook.GetComponent<Image>().sprite = finishedBookSprites[curBooklvl];
+    private void ButtonPressed() {
+        DropList();
     }
 
-    void DisEnableButtons() {
-        for (int i = 0; i < curButtons.Length; i++) {
-            curButtons[i].interactable = false;
-            curButtons[i].gameObject.GetComponent<Image>().raycastTarget = false;
-        }
-
-        curButtons[curButton].interactable = true;
-        curButtons[curButton].gameObject.GetComponent<Image>().raycastTarget = true;
+    private void OnButtonPressed(float percent) {
+        if (percent == 0)
+            curBook.GetComponent<Image>().sprite = emptyBookSprites[_curBooklvl];
+        else if (percent < 0.5f)
+            curBook.GetComponent<Image>().sprite = halfBookSprites[_curBooklvl];
+        else
+            curBook.GetComponent<Image>().sprite = finishedBookSprites[_curBooklvl];
+        //TODO add writing sound
+        //SoundManager.Instance.PlaySound(Sounds.Button);
     }
 
     public void GrewNewHay() {
-        int toGrew = (curBooklvl + 1);
-        for (int i = 0; i < hay.Length; i++) {
-            if (!hay[i].gameObject.activeSelf) {
-                hay[i].Grow();
-
-                Vector3 pos = hay[i].transform.localPosition;
-                pos.x = Random.Range(-1, 1f) * _canvas.rect.width * 0.45f;
-                hay[i].transform.localPosition = pos;
-                toGrew--;
-                if (toGrew == 0)
-                    break;
-            }
+        if (_hayFactory.HayAmount > MainGameConfig.MaxHayOnScreen) {
+            return;
         }
-        
+
+        int grewAmount = _curBooklvl + 1;
+
+        for (int i = 0; i < grewAmount; i++) {
+            Hay h = _hayFactory.GetHay();
+            h.Init(_curHaylvl);
+            h.Grow();
+        }
+
         SoundManager.Instance.PlaySound(Sounds.Growth);
-
-        if (toGrew > 0 && hook.activeSelf)
-            StartCoroutine(HookHay());
-    }
-
-    IEnumerator HookHay() {
-        float hookSpeed = 3f;
-        hook.GetComponent<Rigidbody2D>().simulated = true;
-
-        hook.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        hook.GetComponent<Rigidbody2D>().AddForce(Vector2.right * hookSpeed, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
-        CollectHay();
-        hook.GetComponent<Rigidbody2D>().simulated = false;
-        hook.transform.position = hookPos;
+        if (grewAmount > 0) {
+            _hook.TryStartMove();
+        }
     }
 
     void CheckLvl() {
-        if (xp >= maxXp) {
-            lvl++;
-            xp = 0;
-            maxXp = xpNeeded[lvl];
+        if (_xp >= _maxXp) {
+            _lvl++;
+            _xp = 0;
+            _maxXp = MainGameConfig.XpNeeded[_lvl];
             GetUpgradePoint();
         }
 
-        xpSlider.maxValue = maxXp;
-        xpSlider.value = xp;
-        lvlText.text = lvl.ToString();
+        xpSlider.maxValue = _maxXp;
+        xpSlider.value = _xp;
+        lvlText.text = _lvl.ToString();
 
-        if (curButtonslvl == 4 && curHaylvl == 4 && curBooklvl == 4)
+        if (_curButtonslvl == 4 && _curHaylvl == 4 && _curBooklvl == 4)
             lvlText.text = "??";
     }
 
     void GetUpgradePoint() {
-        haveUpgradePoints++;
+        _haveUpgradePoints++;
 
         SoundManager.Instance.PlaySound(Sounds.Collect);
-        if (curHaylvl < 4)
+        if (_curHaylvl < 4)
             UpgradeHayButton.SetActive(true);
-        if (curBooklvl < 4)
+        if (_curBooklvl < 4)
             UpgradeBookButton.SetActive(true);
-        if (curButtonslvl < 4)
+        if (_curButtonslvl < 4)
             UpgradeButtonsButton.SetActive(true);
     }
 
     public void Upgrade(int what) {
         switch (what) {
             case 0: // hay
-                curHaylvl++;
-                for (int i = 0; i < hay.Length; i++) {
-                    hay[i].GetComponent<Image>().sprite = haySprites[curHaylvl];
+                _curHaylvl++;
+
+                if (_curHaylvl == 4) {
+                    _hook.Activate();
                 }
 
-                if (curHaylvl == 4) {
-                    hook.SetActive(true);
-                }
-
-                if (curHaylvl == 4)
+                if (_curHaylvl == 4)
                     UpgradeHayButton.SetActive(false);
                 else
-                    UpgradeHayButton.GetComponent<Image>().sprite = upgradeSprites[curHaylvl];
+                    UpgradeHayButton.GetComponent<Image>().sprite = upgradeSprites[_curHaylvl];
                 break;
             case 1: // book
-                curBooklvl++;
+                _curBooklvl++;
                 curBook.SetActive(false);
-                curBook = books[curBooklvl];
+                curBook = books[_curBooklvl];
                 curBook.SetActive(true);
 
-                if (curBooklvl == 4)
+                if (_curBooklvl == 4)
                     UpgradeBookButton.SetActive(false);
                 else
-                    UpgradeBookButton.GetComponent<Image>().sprite = upgradeSprites[curBooklvl];
+                    UpgradeBookButton.GetComponent<Image>().sprite = upgradeSprites[_curBooklvl];
                 break;
             case 2: // buttons
-                curButtonslvl++;
-                curButton = 0;
-                switch (curButtonslvl) {
-                    case 0:
-                        for (int i = 0; i < buttons_1.Length; i++) {
-                            buttons_1[i].gameObject.SetActive(true);
-                        }
+                _curButtonslvl++;
+                _keyboardButtonsController.SetUpgradeLevel(_curButtonslvl);
 
-                        curButtons = buttons_1;
-                        break;
-
-                    case 1:
-                        for (int i = 0; i < buttons_1.Length; i++) {
-                            buttons_1[i].gameObject.SetActive(false);
-                        }
-
-                        for (int i = 0; i < buttons_2.Length; i++) {
-                            buttons_2[i].gameObject.SetActive(true);
-                        }
-
-                        curButtons = buttons_2;
-                        break;
-                    case 2:
-                        for (int i = 0; i < buttons_2.Length; i++) {
-                            buttons_2[i].gameObject.SetActive(false);
-                        }
-
-                        for (int i = 0; i < buttons_3.Length; i++) {
-                            buttons_3[i].gameObject.SetActive(true);
-                        }
-
-                        curButtons = buttons_3;
-                        break;
-                    case 3:
-                        for (int i = 0; i < buttons_3.Length; i++) {
-                            buttons_3[i].gameObject.SetActive(false);
-                        }
-
-                        for (int i = 0; i < buttons_4.Length; i++) {
-                            buttons_4[i].gameObject.SetActive(true);
-                        }
-
-                        curButtons = buttons_4;
-                        break;
-                    case 4:
-                        for (int i = 0; i < buttons_4.Length; i++) {
-                            buttons_4[i].gameObject.SetActive(false);
-                        }
-
-                        for (int i = 0; i < buttons_5.Length; i++) {
-                            buttons_5[i].gameObject.SetActive(true);
-                        }
-
-                        curButtons = buttons_5;
-                        break;
-                }
-
-                if (curButtonslvl == 4)
+                if (_curButtonslvl == 4)
                     UpgradeButtonsButton.SetActive(false);
                 else
-                    UpgradeButtonsButton.GetComponent<Image>().sprite = upgradeSprites[curButtonslvl];
+                    UpgradeButtonsButton.GetComponent<Image>().sprite = upgradeSprites[_curButtonslvl];
                 break;
         }
 
-        haveUpgradePoints--;
-        if (haveUpgradePoints == 0) {
+        _haveUpgradePoints--;
+        if (_haveUpgradePoints == 0) {
             UpgradeHayButton.SetActive(false);
             UpgradeButtonsButton.SetActive(false);
             UpgradeBookButton.SetActive(false);
         }
+
         SoundManager.Instance.PlaySound(Sounds.Upgrade);
     }
 
-    public void CollectHay() {
-        for (int i = 0; i < hay.Length; i++) {
-            if (hay[i].CanBeCollected) {
-                hay[i].StartCollecting();
+    private void CollectHay() {
+        foreach (Hay hay in FindObjectsOfType<Hay>()) {
+            if (hay.CanBeCollected) {
+                hay.StartCollecting();
             }
         }
     }
 
-    public void CollectXP() {
-        xp += Mathf.FloorToInt(Mathf.Pow(2, curHaylvl));
-        
+    public void CollectXp() {
+        _xp += Mathf.FloorToInt(Mathf.Pow(2, _curHaylvl));
+
         SoundManager.Instance.PlaySound(Sounds.Collect);
         CheckLvl();
     }
