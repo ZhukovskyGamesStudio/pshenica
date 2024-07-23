@@ -6,9 +6,9 @@ public class PshenicaSaveLoadManager : SaveLoadManager<PshenicaSaveProfile> {
 
     protected override PshenicaSaveProfile CreateNewProfile() {
         PshenicaSaveProfile profile = new PshenicaSaveProfile();
-        profile.HayUpgrade = _mainGameConfig.StartHayLvl - 1;
-        profile.BookUpgrade = _mainGameConfig.StartBookLvl - 1;
-        profile.ButtonsUpgrade = _mainGameConfig.StartButtonsLvl - 1;
+        profile.HayUpgrade = _mainGameConfig.StartHayLvl;
+        profile.BookUpgrade = _mainGameConfig.StartBookLvl;
+        profile.ButtonsUpgrade = _mainGameConfig.StartButtonsLvl;
         return profile;
     }
 }

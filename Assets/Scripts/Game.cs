@@ -63,6 +63,7 @@ public class Game : MonoBehaviour {
         _hook.OnHookCollectedHay += CollectHay;
         InvokeRepeating(nameof(TryUpdateLb), 3, 3);
         SetTotalScore();
+        UpdateUpgradeButtonsActive();
     }
 
     void DropList() {
@@ -166,8 +167,7 @@ public class Game : MonoBehaviour {
     }
 
     private void Upgrade(int what, bool isSkipAnalytics = false) {
-        string upgradeAnalyticsName = "";
-        var eventParams = new Dictionary<string, string>();
+        Dictionary<string, string> eventParams = new Dictionary<string, string>();
         switch (what) {
             case 0: // hay
 
@@ -199,13 +199,17 @@ public class Game : MonoBehaviour {
         }
 
         PshenicaSaveLoadManager.Profile.UpgradePoints--;
-        if (PshenicaSaveLoadManager.Profile.UpgradePoints == 0) {
+        UpdateUpgradeButtonsActive();
+
+        PshenicaSaveLoadManager.Save();
+    }
+
+    private void UpdateUpgradeButtonsActive() {
+        if (PshenicaSaveLoadManager.Profile.UpgradePoints <= 0) {
             UpgradeHayButton.SetActive(false);
             UpgradeButtonsButton.SetActive(false);
             UpgradeBookButton.SetActive(false);
         }
-
-        PshenicaSaveLoadManager.Save();
     }
 
     private void SetButtonsLvl() {
@@ -276,29 +280,29 @@ public class Game : MonoBehaviour {
     }
 
     //inside class
-    Vector2 firstPressPos;
-    Vector2 secondPressPos;
-    Vector2 currentSwipe;
+    Vector2 _firstPressPos;
+    Vector2 _secondPressPos;
+    Vector2 _currentSwipe;
 
     void CheckSwipe() {
         if (Input.GetMouseButtonDown(0)) {
             //save began touch 2d point
-            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            _firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
 
         if (Input.GetMouseButtonUp(0)) {
             //save ended touch 2d point
-            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            _secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
             //create vector from the two points
-            currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-            float distance = secondPressPos.x - firstPressPos.x;
+            _currentSwipe = new Vector2(_secondPressPos.x - _firstPressPos.x, _secondPressPos.y - _firstPressPos.y);
+            float distance = _secondPressPos.x - _firstPressPos.x;
 
             //normalize the 2d vector
-            currentSwipe.Normalize();
+            _currentSwipe.Normalize();
 
             //swipe right
-            if (distance > Screen.width / 1.5f && currentSwipe.x > 0.5f && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f) {
+            if (distance > Screen.width / 1.5f && _currentSwipe.x > 0.5f && _currentSwipe.y > -0.5f && _currentSwipe.y < 0.5f) {
                 CollectHay();
             }
         }
@@ -307,23 +311,23 @@ public class Game : MonoBehaviour {
             Touch t = Input.GetTouch(0);
             if (t.phase == TouchPhase.Began) {
                 //save began touch 2d point
-                firstPressPos = new Vector2(t.position.x, t.position.y);
+                _firstPressPos = new Vector2(t.position.x, t.position.y);
             }
 
             if (t.phase == TouchPhase.Ended) {
                 //save ended touch 2d point
-                secondPressPos = new Vector2(t.position.x, t.position.y);
+                _secondPressPos = new Vector2(t.position.x, t.position.y);
 
                 //create vector from the two points
-                currentSwipe = new Vector3(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+                _currentSwipe = new Vector3(_secondPressPos.x - _firstPressPos.x, _secondPressPos.y - _firstPressPos.y);
 
-                float distance = secondPressPos.x - firstPressPos.x;
+                float distance = _secondPressPos.x - _firstPressPos.x;
 
                 //normalize the 2d vector
-                currentSwipe.Normalize();
+                _currentSwipe.Normalize();
 
                 //swipe right
-                if (distance > Screen.width / 1.5f && currentSwipe.x > 0.5f && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f) {
+                if (distance > Screen.width / 1.5f && _currentSwipe.x > 0.5f && _currentSwipe.y > -0.5f && _currentSwipe.y < 0.5f) {
                     CollectHay();
                 }
             }

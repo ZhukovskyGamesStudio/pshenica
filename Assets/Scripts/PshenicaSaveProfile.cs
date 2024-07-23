@@ -9,5 +9,5 @@ public class PshenicaSaveProfile : SaveProfile {
     public int ButtonsUpgrade;
     public int BookUpgrade;
     public int HayUpgrade;
-    public PshenicaSaveProfile() { }
+    public float Volume = 0.5f;
 }

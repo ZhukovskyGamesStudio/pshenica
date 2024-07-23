@@ -10,14 +10,20 @@ public class SoundManager : MonoBehaviour {
 
     [SerializeField]
     private Slider _volumeSlider;
-    
+
     private void Awake() {
         Instance = this;
+    }
+
+    private void Start() {
+        _volumeSlider.SetValueWithoutNotify(PshenicaSaveLoadManager.Profile.Volume);
         UpdateVolume(_volumeSlider.value);
     }
 
     public void UpdateVolume(float percent) {
         AudioListener.volume = percent;
+        PshenicaSaveLoadManager.Profile.Volume = percent;
+        PshenicaSaveLoadManager.Save();
     }
 
     public void PlaySound(Sounds type) {

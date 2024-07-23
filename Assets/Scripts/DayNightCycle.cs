@@ -42,6 +42,7 @@ public class DayNightCycle : MonoBehaviour {
 
     private IEnumerator MovingCoroutine() {
         ChangeDayNight();
+        _movingContainer.transform.localPosition = TargetPosition;
         while (true) {
             if (!_isDragging) {
                 Vector3 position = _movingContainer.transform.localPosition;
