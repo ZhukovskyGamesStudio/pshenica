@@ -11,15 +11,6 @@ public class Game : MonoBehaviour {
     [SerializeField]
     private MainGameConfig _mainGameConfig;
 
-    [SerializeField]
-    private int _startHayLevel;
-
-    [SerializeField]
-    private int _startBookLevel;
-
-    [SerializeField]
-    private int _startButtonsLevel;
-
     [Header("Parameters")]
     public Transform ListsPanel;
 
@@ -46,19 +37,11 @@ public class Game : MonoBehaviour {
     public Text lvlText;
     public Slider xpSlider;
 
-    int _xp;
     int _maxXp;
-    int _lvl;
-
-    int _curHaylvl;
-    int _curBooklvl;
-    int _curButtonslvl;
 
     public GameObject UpgradeHayButton;
     public GameObject UpgradeButtonsButton;
     public GameObject UpgradeBookButton;
-
-    int _haveUpgradePoints;
 
     private void Awake() {
         Instance = this;
@@ -66,35 +49,26 @@ public class Game : MonoBehaviour {
     }
 
     private void Start() {
-        _curHaylvl = _startHayLevel - 1;
-        _curBooklvl = _startBookLevel - 1;
-        _curButtonslvl = _startButtonsLevel - 1;
-        _xp = 0;
-        _lvl = 0;
-        _maxXp = MainGameConfig.XpNeeded[_lvl];
+        _maxXp = MainGameConfig.XpNeeded[PshenicaSaveLoadManager.Profile.Lvl];
         CheckLvl();
 
         //StartCoroutine(HookHay());
-        Upgrade(0,true);
-        Upgrade(1,true);
-        Upgrade(2,true);
+        SetHayLvl();
+        SetBookLvl();
+        SetButtonsLvl();
 
-        UpgradeHayButton.SetActive(false);
-        UpgradeButtonsButton.SetActive(false);
-        UpgradeBookButton.SetActive(false);
-        _haveUpgradePoints = 0;
-        _keyboardButtonsController.SetUpgradeLevel(_curButtonslvl);
         _keyboardButtonsController.OnLastButtonPressed += ButtonPressed;
         _keyboardButtonsController.OnNextButtonPressed += OnButtonPressed;
 
         _hook.OnHookCollectedHay += CollectHay;
         InvokeRepeating(nameof(TryUpdateLb), 3, 3);
+        SetTotalScore();
     }
 
     void DropList() {
         GameObject list = Instantiate(curBook, ListsPanel);
         list.transform.SetAsFirstSibling();
-        list.GetComponent<Image>().sprite = finishedBookSprites[_curBooklvl];
+        list.GetComponent<Image>().sprite = finishedBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
         SoundManager.Instance.PlaySound(Sounds.WriteProgress);
         Rigidbody2D rb = list.GetComponent<Rigidbody2D>();
         rb.simulated = true;
@@ -109,11 +83,11 @@ public class Game : MonoBehaviour {
 
     private void OnButtonPressed(float percent) {
         if (percent == 0)
-            curBook.GetComponent<Image>().sprite = emptyBookSprites[_curBooklvl];
+            curBook.GetComponent<Image>().sprite = emptyBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
         else if (percent < 0.5f)
-            curBook.GetComponent<Image>().sprite = halfBookSprites[_curBooklvl];
+            curBook.GetComponent<Image>().sprite = halfBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
         else
-            curBook.GetComponent<Image>().sprite = finishedBookSprites[_curBooklvl];
+            curBook.GetComponent<Image>().sprite = finishedBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
         //TODO add writing sound
         //SoundManager.Instance.PlaySound(Sounds.Button);
     }
@@ -123,11 +97,11 @@ public class Game : MonoBehaviour {
             return;
         }
 
-        int grewAmount = _curBooklvl + 1;
+        int grewAmount = PshenicaSaveLoadManager.Profile.BookUpgrade + 1;
 
         for (int i = 0; i < grewAmount; i++) {
             Hay h = _hayFactory.GetHay();
-            h.Init(_curHaylvl);
+            h.Init(PshenicaSaveLoadManager.Profile.HayUpgrade);
             h.Grow();
         }
 
@@ -139,103 +113,130 @@ public class Game : MonoBehaviour {
 
     void CheckLvl() {
         if (IsAllUpgradesBought) {
-            _totalScoreText.gameObject.SetActive(true);
-            lvlText.text = "??";
+            SetTotalScore();
             return;
         }
 
-        if (_xp >= _maxXp) {
-            _lvl++;
-            _xp = 0;
-            _maxXp = MainGameConfig.XpNeeded[_lvl];
+        if (PshenicaSaveLoadManager.Profile.Xp >= _maxXp) {
+            PshenicaSaveLoadManager.Profile.Lvl++;
+            PshenicaSaveLoadManager.Profile.Xp = 0;
+            _maxXp = MainGameConfig.XpNeeded[PshenicaSaveLoadManager.Profile.Lvl];
             GetUpgradePoint();
         }
 
         xpSlider.maxValue = _maxXp;
-        xpSlider.value = _xp;
-        lvlText.text = _lvl.ToString();
+        xpSlider.value = PshenicaSaveLoadManager.Profile.Xp;
+        lvlText.text = PshenicaSaveLoadManager.Profile.Lvl.ToString();
 
         if (IsAllUpgradesBought) {
-            _totalScoreText.gameObject.SetActive(true);
-            lvlText.text = "??";
+            SetTotalScore();
             YandexMetrica.Send("allUpgradesBought");
         }
     }
 
-    private bool IsAllUpgradesBought => _curButtonslvl == 4 && _curHaylvl == 4 && _curBooklvl == 4;
+    private void SetTotalScore() {
+        if (IsAllUpgradesBought) {
+            _totalScoreText.gameObject.SetActive(true);
+            lvlText.text = "??";
+            _totalScoreText.text = PshenicaSaveLoadManager.Profile.Xp.ToString();
+        } else {
+            _totalScoreText.gameObject.SetActive(false);
+        }
+    }
+
+    private bool IsAllUpgradesBought => PshenicaSaveLoadManager.Profile.HayUpgrade == 4 && PshenicaSaveLoadManager.Profile.BookUpgrade == 4 &&
+                                        PshenicaSaveLoadManager.Profile.ButtonsUpgrade == 4;
 
     void GetUpgradePoint() {
-        _haveUpgradePoints++;
+        PshenicaSaveLoadManager.Profile.UpgradePoints++;
 
         SoundManager.Instance.PlaySound(Sounds.Collect);
-        if (_curHaylvl < 4)
+        if (PshenicaSaveLoadManager.Profile.HayUpgrade < 4)
             UpgradeHayButton.SetActive(true);
-        if (_curBooklvl < 4)
+        if (PshenicaSaveLoadManager.Profile.BookUpgrade < 4)
             UpgradeBookButton.SetActive(true);
-        if (_curButtonslvl < 4)
+        if (PshenicaSaveLoadManager.Profile.ButtonsUpgrade < 4)
             UpgradeButtonsButton.SetActive(true);
+
+        PshenicaSaveLoadManager.Save();
     }
 
     public void UpgradeButton(int what) {
         Upgrade(what);
     }
-    
+
     private void Upgrade(int what, bool isSkipAnalytics = false) {
         string upgradeAnalyticsName = "";
         var eventParams = new Dictionary<string, string>();
         switch (what) {
             case 0: // hay
-               
-                _curHaylvl++;
-                eventParams.Add("hay", _curHaylvl.ToString());
-                if (_curHaylvl == 4) {
-                    _hook.Activate();
-                }
 
-                if (_curHaylvl == 4)
-                    UpgradeHayButton.SetActive(false);
-                else
-                    UpgradeHayButton.GetComponent<Image>().sprite = upgradeSprites[_curHaylvl];
+                PshenicaSaveLoadManager.Profile.HayUpgrade++;
+                eventParams.Add("hay", PshenicaSaveLoadManager.Profile.HayUpgrade.ToString());
+
+                SetHayLvl();
                 break;
             case 1: // book
-              
-                _curBooklvl++;
-                eventParams.Add("book", _curBooklvl.ToString());
-                curBook.SetActive(false);
-                curBook = books[_curBooklvl];
-                curBook.SetActive(true);
 
-                if (_curBooklvl == 4)
-                    UpgradeBookButton.SetActive(false);
-                else
-                    UpgradeBookButton.GetComponent<Image>().sprite = upgradeSprites[_curBooklvl];
+                PshenicaSaveLoadManager.Profile.BookUpgrade++;
+                eventParams.Add("book", PshenicaSaveLoadManager.Profile.BookUpgrade.ToString());
+
+                SetBookLvl();
                 break;
             case 2: // buttons
-               
-                _curButtonslvl++;
-                 eventParams.Add("buttons", _curButtonslvl.ToString());
-                _keyboardButtonsController.SetUpgradeLevel(_curButtonslvl);
 
-                if (_curButtonslvl == 4)
-                    UpgradeButtonsButton.SetActive(false);
-                else
-                    UpgradeButtonsButton.GetComponent<Image>().sprite = upgradeSprites[_curButtonslvl];
+                PshenicaSaveLoadManager.Profile.ButtonsUpgrade++;
+                eventParams.Add("buttons", PshenicaSaveLoadManager.Profile.ButtonsUpgrade.ToString());
+                SetButtonsLvl();
                 break;
         }
+
+        PshenicaSaveLoadManager.Save();
 
         if (!isSkipAnalytics) {
             YandexMetrica.Send("upgradeBought", eventParams);
             SoundManager.Instance.PlaySound(Sounds.Upgrade);
         }
-       
-        _haveUpgradePoints--;
-        if (_haveUpgradePoints == 0) {
+
+        PshenicaSaveLoadManager.Profile.UpgradePoints--;
+        if (PshenicaSaveLoadManager.Profile.UpgradePoints == 0) {
             UpgradeHayButton.SetActive(false);
             UpgradeButtonsButton.SetActive(false);
             UpgradeBookButton.SetActive(false);
         }
 
-        
+        PshenicaSaveLoadManager.Save();
+    }
+
+    private void SetButtonsLvl() {
+        _keyboardButtonsController.SetUpgradeLevel(PshenicaSaveLoadManager.Profile.ButtonsUpgrade);
+
+        if (PshenicaSaveLoadManager.Profile.ButtonsUpgrade == 4)
+            UpgradeButtonsButton.SetActive(false);
+        else
+            UpgradeButtonsButton.GetComponent<Image>().sprite = upgradeSprites[PshenicaSaveLoadManager.Profile.ButtonsUpgrade];
+    }
+
+    private void SetBookLvl() {
+        curBook.SetActive(false);
+        curBook = books[PshenicaSaveLoadManager.Profile.BookUpgrade];
+        curBook.SetActive(true);
+
+        if (PshenicaSaveLoadManager.Profile.BookUpgrade == 4)
+            UpgradeBookButton.SetActive(false);
+        else
+            UpgradeBookButton.GetComponent<Image>().sprite = upgradeSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
+    }
+
+    private void SetHayLvl() {
+        if (PshenicaSaveLoadManager.Profile.HayUpgrade == 4) {
+            _hook.Activate();
+        }
+
+        if (PshenicaSaveLoadManager.Profile.HayUpgrade == 4)
+            UpgradeHayButton.SetActive(false);
+        else
+            UpgradeHayButton.GetComponent<Image>().sprite = upgradeSprites[PshenicaSaveLoadManager.Profile.HayUpgrade];
     }
 
     private void CollectHay() {
@@ -247,9 +248,10 @@ public class Game : MonoBehaviour {
     }
 
     public void CollectXp() {
-        _xp += Mathf.FloorToInt(Mathf.Pow(2, _curHaylvl));
-        _totalScoreText.text = _xp.ToString();
+        PshenicaSaveLoadManager.Profile.Xp += Mathf.FloorToInt(Mathf.Pow(2, PshenicaSaveLoadManager.Profile.HayUpgrade));
+        _totalScoreText.text = PshenicaSaveLoadManager.Profile.Xp.ToString();
         CheckLvl();
+        PshenicaSaveLoadManager.Save();
     }
 
     private void TryUpdateLb() {
@@ -258,9 +260,9 @@ public class Game : MonoBehaviour {
         }
 
         int saved = PlayerPrefs.GetInt("totalScore", 0);
-        if (_xp > saved) {
-            PlayerPrefs.SetInt("totalScore", _xp);
-            YandexGame.NewLeaderboardScores("totalScore", _xp);
+        if (PshenicaSaveLoadManager.Profile.Xp > saved) {
+            PlayerPrefs.SetInt("totalScore", PshenicaSaveLoadManager.Profile.Xp);
+            YandexGame.NewLeaderboardScores("totalScore", PshenicaSaveLoadManager.Profile.Xp);
         }
     }
 

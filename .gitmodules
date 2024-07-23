@@ -1,0 +1,3 @@
+[submodule "Assets/moneygamespackage"]
+	path = Assets/moneygamespackage
+	url = https://github.com/GrafEnters/moneygamespackage.git
