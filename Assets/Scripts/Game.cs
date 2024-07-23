@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 using Random = UnityEngine.Random;
 
 public class Game : MonoBehaviour {
@@ -10,15 +11,23 @@ public class Game : MonoBehaviour {
     [SerializeField]
     private MainGameConfig _mainGameConfig;
 
-    public int startHayLevel;
-    public int startBookLevel;
-    public int startButtonsLevel;
+    [SerializeField]
+    private int _startHayLevel;
+
+    [SerializeField]
+    private int _startBookLevel;
+
+    [SerializeField]
+    private int _startButtonsLevel;
 
     [Header("Parameters")]
     public Transform ListsPanel;
 
     [SerializeField]
     private HayFactory _hayFactory;
+
+    [SerializeField]
+    private Text _totalScoreText;
 
     [SerializeField]
     private KeyboardButtonsController _keyboardButtonsController;
@@ -32,7 +41,7 @@ public class Game : MonoBehaviour {
     public Sprite[] emptyBookSprites;
     public Sprite[] halfBookSprites;
     public Sprite[] finishedBookSprites;
-    
+
     public GameObject curBook;
     public Text lvlText;
     public Slider xpSlider;
@@ -57,18 +66,18 @@ public class Game : MonoBehaviour {
     }
 
     private void Start() {
-        _curHaylvl = startHayLevel - 1;
-        _curBooklvl = startBookLevel - 1;
-        _curButtonslvl = startButtonsLevel - 1;
+        _curHaylvl = _startHayLevel - 1;
+        _curBooklvl = _startBookLevel - 1;
+        _curButtonslvl = _startButtonsLevel - 1;
         _xp = 0;
         _lvl = 0;
         _maxXp = MainGameConfig.XpNeeded[_lvl];
         CheckLvl();
 
         //StartCoroutine(HookHay());
-        Upgrade(0);
-        Upgrade(1);
-        Upgrade(2);
+        Upgrade(0,true);
+        Upgrade(1,true);
+        Upgrade(2,true);
 
         UpgradeHayButton.SetActive(false);
         UpgradeButtonsButton.SetActive(false);
@@ -79,13 +88,14 @@ public class Game : MonoBehaviour {
         _keyboardButtonsController.OnNextButtonPressed += OnButtonPressed;
 
         _hook.OnHookCollectedHay += CollectHay;
+        InvokeRepeating(nameof(TryUpdateLb), 3, 3);
     }
 
     void DropList() {
         GameObject list = Instantiate(curBook, ListsPanel);
         list.transform.SetAsFirstSibling();
         list.GetComponent<Image>().sprite = finishedBookSprites[_curBooklvl];
-
+        SoundManager.Instance.PlaySound(Sounds.WriteProgress);
         Rigidbody2D rb = list.GetComponent<Rigidbody2D>();
         rb.simulated = true;
 
@@ -128,6 +138,12 @@ public class Game : MonoBehaviour {
     }
 
     void CheckLvl() {
+        if (IsAllUpgradesBought) {
+            _totalScoreText.gameObject.SetActive(true);
+            lvlText.text = "??";
+            return;
+        }
+
         if (_xp >= _maxXp) {
             _lvl++;
             _xp = 0;
@@ -139,9 +155,14 @@ public class Game : MonoBehaviour {
         xpSlider.value = _xp;
         lvlText.text = _lvl.ToString();
 
-        if (_curButtonslvl == 4 && _curHaylvl == 4 && _curBooklvl == 4)
+        if (IsAllUpgradesBought) {
+            _totalScoreText.gameObject.SetActive(true);
             lvlText.text = "??";
+            YandexMetrica.Send("allUpgradesBought");
+        }
     }
+
+    private bool IsAllUpgradesBought => _curButtonslvl == 4 && _curHaylvl == 4 && _curBooklvl == 4;
 
     void GetUpgradePoint() {
         _haveUpgradePoints++;
@@ -155,11 +176,18 @@ public class Game : MonoBehaviour {
             UpgradeButtonsButton.SetActive(true);
     }
 
-    public void Upgrade(int what) {
+    public void UpgradeButton(int what) {
+        Upgrade(what);
+    }
+    
+    private void Upgrade(int what, bool isSkipAnalytics = false) {
+        string upgradeAnalyticsName = "";
+        var eventParams = new Dictionary<string, string>();
         switch (what) {
             case 0: // hay
+               
                 _curHaylvl++;
-
+                eventParams.Add("hay", _curHaylvl.ToString());
                 if (_curHaylvl == 4) {
                     _hook.Activate();
                 }
@@ -170,7 +198,9 @@ public class Game : MonoBehaviour {
                     UpgradeHayButton.GetComponent<Image>().sprite = upgradeSprites[_curHaylvl];
                 break;
             case 1: // book
+              
                 _curBooklvl++;
+                eventParams.Add("book", _curBooklvl.ToString());
                 curBook.SetActive(false);
                 curBook = books[_curBooklvl];
                 curBook.SetActive(true);
@@ -181,7 +211,9 @@ public class Game : MonoBehaviour {
                     UpgradeBookButton.GetComponent<Image>().sprite = upgradeSprites[_curBooklvl];
                 break;
             case 2: // buttons
+               
                 _curButtonslvl++;
+                 eventParams.Add("buttons", _curButtonslvl.ToString());
                 _keyboardButtonsController.SetUpgradeLevel(_curButtonslvl);
 
                 if (_curButtonslvl == 4)
@@ -191,6 +223,11 @@ public class Game : MonoBehaviour {
                 break;
         }
 
+        if (!isSkipAnalytics) {
+            YandexMetrica.Send("upgradeBought", eventParams);
+            SoundManager.Instance.PlaySound(Sounds.Upgrade);
+        }
+       
         _haveUpgradePoints--;
         if (_haveUpgradePoints == 0) {
             UpgradeHayButton.SetActive(false);
@@ -198,7 +235,7 @@ public class Game : MonoBehaviour {
             UpgradeBookButton.SetActive(false);
         }
 
-        SoundManager.Instance.PlaySound(Sounds.Upgrade);
+        
     }
 
     private void CollectHay() {
@@ -211,9 +248,20 @@ public class Game : MonoBehaviour {
 
     public void CollectXp() {
         _xp += Mathf.FloorToInt(Mathf.Pow(2, _curHaylvl));
-
-        SoundManager.Instance.PlaySound(Sounds.Collect);
+        _totalScoreText.text = _xp.ToString();
         CheckLvl();
+    }
+
+    private void TryUpdateLb() {
+        if (!IsAllUpgradesBought) {
+            return;
+        }
+
+        int saved = PlayerPrefs.GetInt("totalScore", 0);
+        if (_xp > saved) {
+            PlayerPrefs.SetInt("totalScore", _xp);
+            YandexGame.NewLeaderboardScores("totalScore", _xp);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D coll) {

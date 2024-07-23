@@ -21,7 +21,7 @@ public class Hook : MonoBehaviour {
     }
 
     public void TryStartMove() {
-        if (_isFlying && _rb2d.gameObject.activeSelf) {
+        if (_isFlying || !_rb2d.gameObject.activeInHierarchy) {
             return;
         }
 
@@ -34,7 +34,8 @@ public class Hook : MonoBehaviour {
 
         _rb2d.velocity = Vector2.zero;
         _rb2d.AddForce(Vector2.right * Game.MainGameConfig.HookSpeed, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
+        SoundManager.Instance.PlaySound(Sounds.Hook);
+        yield return new WaitForSeconds(1.5f);
         OnHookCollectedHay?.Invoke();
         yield return new WaitForSeconds(3f);
         _rb2d.simulated = false;

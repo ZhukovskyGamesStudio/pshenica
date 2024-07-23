@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour {
     public static SoundManager Instance;
 
     [SerializeField]
-    private AudioSource _buttonSource, _upgradeSource, _growthSource, _collectSource, _writeProgressSource;
+    private AudioSource _buttonSource, _upgradeSource, _growthSource, _collectSource, _writeProgressSource, _hook;
 
     [SerializeField]
     private Slider _volumeSlider;
@@ -37,6 +37,9 @@ public class SoundManager : MonoBehaviour {
             case Sounds.WriteProgress:
                 _writeProgressSource.Play();
                 break;
+            case Sounds.Hook:
+                _hook.Play();
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(type), type, null);
         }
@@ -49,5 +52,6 @@ public enum Sounds {
     Upgrade,
     Growth,
     Collect,
-    WriteProgress
+    WriteProgress,
+    Hook
 }

@@ -77,6 +77,8 @@ public class KeyboardButtonsController : MonoBehaviour {
             _curButtons[i].gameObject.GetComponent<Image>().raycastTarget = false;
         }
 
+        _curButton = Mathf.Min(_curButton, _curButtons.Length - 1);
+        
         _curButtons[_curButton].interactable = true;
         _curButtons[_curButton].gameObject.GetComponent<Image>().raycastTarget = true;
     }
