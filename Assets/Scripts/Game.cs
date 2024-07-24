@@ -128,11 +128,6 @@ public class Game : MonoBehaviour {
         xpSlider.maxValue = _maxXp;
         xpSlider.value = PshenicaSaveLoadManager.Profile.Xp;
         lvlText.text = PshenicaSaveLoadManager.Profile.Lvl.ToString();
-
-        if (IsAllUpgradesBought) {
-            SetTotalScore();
-            YandexMetrica.Send("allUpgradesBought");
-        }
     }
 
     private void SetTotalScore() {
@@ -166,42 +161,46 @@ public class Game : MonoBehaviour {
         Upgrade(what);
     }
 
-    private void Upgrade(int what, bool isSkipAnalytics = false) {
+    private void Upgrade(int what) {
         Dictionary<string, string> eventParams = new Dictionary<string, string>();
         switch (what) {
             case 0: // hay
 
                 PshenicaSaveLoadManager.Profile.HayUpgrade++;
-                eventParams.Add("hay", PshenicaSaveLoadManager.Profile.HayUpgrade.ToString());
+                eventParams.Add("upgradeBought", "hay_" + PshenicaSaveLoadManager.Profile.HayUpgrade);
 
                 SetHayLvl();
                 break;
             case 1: // book
 
                 PshenicaSaveLoadManager.Profile.BookUpgrade++;
-                eventParams.Add("book", PshenicaSaveLoadManager.Profile.BookUpgrade.ToString());
+                eventParams.Add("upgradeBought", "book_" + PshenicaSaveLoadManager.Profile.BookUpgrade);
 
                 SetBookLvl();
                 break;
             case 2: // buttons
 
                 PshenicaSaveLoadManager.Profile.ButtonsUpgrade++;
-                eventParams.Add("buttons", PshenicaSaveLoadManager.Profile.ButtonsUpgrade.ToString());
+                eventParams.Add("upgradeBought", "buttons_" + PshenicaSaveLoadManager.Profile.ButtonsUpgrade);
                 SetButtonsLvl();
                 break;
         }
 
         PshenicaSaveLoadManager.Save();
 
-        if (!isSkipAnalytics) {
-            YandexMetrica.Send("upgradeBought", eventParams);
-            SoundManager.Instance.PlaySound(Sounds.Upgrade);
-        }
+        YandexMetrica.Send("upgradeBought", eventParams);
+        SoundManager.Instance.PlaySound(Sounds.Upgrade);
+        
 
         PshenicaSaveLoadManager.Profile.UpgradePoints--;
         UpdateUpgradeButtonsActive();
 
         PshenicaSaveLoadManager.Save();
+        
+        if (IsAllUpgradesBought) {
+            SetTotalScore();
+            YandexMetrica.Send("allUpgradesBought", new Dictionary<string, string>() { { "allUpgradesBought", "true" } });
+        }
     }
 
     private void UpdateUpgradeButtonsActive() {

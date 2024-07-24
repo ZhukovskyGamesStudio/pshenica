@@ -1,2 +1,2 @@
 Build path: D:/Unity Projects/_Builds/Pshenica/webGl
-Build number: 4
+Build number: 8
