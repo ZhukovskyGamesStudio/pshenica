@@ -30,7 +30,7 @@ public class Game : MonoBehaviour {
 
     [SerializeField]
     private List<Book> _books;
-    
+
     private Book _curBook;
     public Text lvlText;
     public Slider xpSlider;
@@ -188,18 +188,22 @@ public class Game : MonoBehaviour {
 
         PshenicaSaveLoadManager.Save();
 
+#if UNITY_WEBGL
         YandexMetrica.Send("upgradeBought", eventParams);
+#endif
+
         SoundManager.Instance.PlaySound(Sounds.Upgrade);
-        
 
         PshenicaSaveLoadManager.Profile.UpgradePoints--;
         UpdateUpgradeButtonsActive();
 
         PshenicaSaveLoadManager.Save();
-        
+
         if (IsAllUpgradesBought) {
             SetTotalScore();
+#if UNITY_WEBGL
             YandexMetrica.Send("allUpgradesBought", new Dictionary<string, string>() { { "allUpgradesBought", "true" } });
+#endif
         }
     }
 
@@ -224,6 +228,7 @@ public class Game : MonoBehaviour {
         if (_curBook != null) {
             _curBook.gameObject.SetActive(false);
         }
+
         _curBook = _books[PshenicaSaveLoadManager.Profile.BookUpgrade];
         _curBook.gameObject.SetActive(true);
 
@@ -267,7 +272,9 @@ public class Game : MonoBehaviour {
         int saved = PlayerPrefs.GetInt("totalScore", 0);
         if (PshenicaSaveLoadManager.Profile.Xp > saved) {
             PlayerPrefs.SetInt("totalScore", PshenicaSaveLoadManager.Profile.Xp);
+#if UNITY_WEBGL
             YandexGame.NewLeaderboardScores("totalScore", PshenicaSaveLoadManager.Profile.Xp);
+#endif
         }
     }
 
