@@ -28,12 +28,10 @@ public class Game : MonoBehaviour {
 
     public Sprite[] upgradeSprites;
 
-    public GameObject[] books;
-    public Sprite[] emptyBookSprites;
-    public Sprite[] halfBookSprites;
-    public Sprite[] finishedBookSprites;
-
-    public GameObject curBook;
+    [SerializeField]
+    private List<Book> _books;
+    
+    private Book _curBook;
     public Text lvlText;
     public Slider xpSlider;
 
@@ -67,9 +65,9 @@ public class Game : MonoBehaviour {
     }
 
     void DropList() {
-        GameObject list = Instantiate(curBook, ListsPanel);
+        Book list = Instantiate(_curBook, ListsPanel);
         list.transform.SetAsFirstSibling();
-        list.GetComponent<Image>().sprite = finishedBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
+        list.SetUpgradeState(2);
         SoundManager.Instance.PlaySound(Sounds.WriteProgress);
         Rigidbody2D rb = list.GetComponent<Rigidbody2D>();
         rb.simulated = true;
@@ -80,15 +78,17 @@ public class Game : MonoBehaviour {
 
     private void ButtonPressed() {
         DropList();
+        _curBook.SetUpgradeState(0);
     }
 
     private void OnButtonPressed(float percent) {
-        if (percent == 0)
-            curBook.GetComponent<Image>().sprite = emptyBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
-        else if (percent < 0.5f)
-            curBook.GetComponent<Image>().sprite = halfBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
-        else
-            curBook.GetComponent<Image>().sprite = finishedBookSprites[PshenicaSaveLoadManager.Profile.BookUpgrade];
+        if (percent == 0) {
+            _curBook.SetUpgradeState(0);
+        } else if (percent < 0.5f) {
+            _curBook.SetUpgradeState(1);
+        } else {
+            _curBook.SetUpgradeState(2);
+        }
         //TODO add writing sound
         //SoundManager.Instance.PlaySound(Sounds.Button);
     }
@@ -221,9 +221,11 @@ public class Game : MonoBehaviour {
     }
 
     private void SetBookLvl() {
-        curBook.SetActive(false);
-        curBook = books[PshenicaSaveLoadManager.Profile.BookUpgrade];
-        curBook.SetActive(true);
+        if (_curBook != null) {
+            _curBook.gameObject.SetActive(false);
+        }
+        _curBook = _books[PshenicaSaveLoadManager.Profile.BookUpgrade];
+        _curBook.gameObject.SetActive(true);
 
         if (PshenicaSaveLoadManager.Profile.BookUpgrade == 4)
             UpgradeBookButton.SetActive(false);
@@ -243,7 +245,7 @@ public class Game : MonoBehaviour {
     }
 
     private void CollectHay() {
-        foreach (Hay hay in FindObjectsOfType<Hay>()) {
+        foreach (Hay hay in FindObjectsByType<Hay>(FindObjectsSortMode.None)) {
             if (hay.CanBeCollected) {
                 hay.StartCollecting();
             }

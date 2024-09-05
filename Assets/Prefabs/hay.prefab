@@ -96,10 +96,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6070408088833015501, guid: 1568af1c0c086534cb6e794a006de199,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: f227ea83d05dd6543950bab0aa94e237, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -119,20 +118,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03ac88814562104c88805a1d0c37031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  HayHolder: {fileID: 0}
-  Game: {fileID: 0}
   forcePower: 100
   distanceBorder: 0.15
   _animation: {fileID: 2241567986770063369}
   _growClip: {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
   _image: {fileID: 4665806581237059533}
   _haySprites:
-  - {fileID: 6070408088833015501, guid: 1568af1c0c086534cb6e794a006de199, type: 3}
-  - {fileID: -5087436106483148130, guid: 1568af1c0c086534cb6e794a006de199, type: 3}
-  - {fileID: -1598875456457009981, guid: 1568af1c0c086534cb6e794a006de199, type: 3}
-  - {fileID: 4806562292664024559, guid: 1568af1c0c086534cb6e794a006de199, type: 3}
-  - {fileID: 4806562292664024559, guid: 1568af1c0c086534cb6e794a006de199, type: 3}
+  - {fileID: 21300000, guid: f227ea83d05dd6543950bab0aa94e237, type: 3}
+  - {fileID: 21300000, guid: bf12c577e2f239648b564a8b52d0a63b, type: 3}
+  - {fileID: 21300000, guid: 0835f4fe465bc7c49b5798109f9c037e, type: 3}
+  - {fileID: 21300000, guid: 8daf8515b51ed3245bfc0e3c711d448d, type: 3}
+  - {fileID: 21300000, guid: 8daf8515b51ed3245bfc0e3c711d448d, type: 3}
 --- !u!114 &288075836755323431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,11 +166,12 @@ Animation:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805259722635751709}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 7400000, guid: 92fed65840d2aba4c969aa99340407a6, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
+  m_UpdateMode: 0
   m_CullingType: 0

@@ -8,7 +8,7 @@ public class KeyboardButtonsController : MonoBehaviour {
     public Button[] _buttons2;
     public Button[] _buttons3;
     public Button[] _buttons4;
-    Button[] _curButtons;
+    Button[] _curButtons; 
 
     public Action OnLastButtonPressed;
     public Action<float> OnNextButtonPressed;

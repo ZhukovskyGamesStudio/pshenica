@@ -60,7 +60,7 @@ public class Hay : MonoBehaviour {
         rb.AddForce(Vector2.up * 30);
         yield return new WaitForSeconds(0.3f);
 
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         Vector2 startDist = _flyTarget.position - transform.position;
         Vector2 dir = startDist;
         while (dir.magnitude > distanceBorder) {

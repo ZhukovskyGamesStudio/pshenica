@@ -32,7 +32,7 @@ public class Hook : MonoBehaviour {
         _isFlying = true;
         _rb2d.simulated = true;
 
-        _rb2d.velocity = Vector2.zero;
+        _rb2d.linearVelocity = Vector2.zero;
         _rb2d.AddForce(Vector2.right * Game.MainGameConfig.HookSpeed, ForceMode2D.Impulse);
         SoundManager.Instance.PlaySound(Sounds.Hook);
         yield return new WaitForSeconds(1.5f);

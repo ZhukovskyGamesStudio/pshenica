@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BookUpgrades
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 850bb95978225e4429eba68bb8111031, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 215f69c16ae48e6449787cb47432d458: 766648047244476146
+    - 215f69c16ae48e6449787cb47432d458: 5286340657683524416
+    - dd79622408902d842918ae3c67d20fea: -5048580617791963602
+    - dd79622408902d842918ae3c67d20fea: -5578237403883283956
+    - c8a35a877f157b744acceb0458e75c58: -2903966385582138216
+    - c8a35a877f157b744acceb0458e75c58: 6365608141407672193
+    - a93cc7e8fa4c5364db3a9dbcbe5ecb3f: 8015194060872597441
+    - a93cc7e8fa4c5364db3a9dbcbe5ecb3f: -8232162339024701189
+    - 1219446d4fdec604596bd557a378e6f3: 6806212276949370262
+    - 1219446d4fdec604596bd557a378e6f3: -8986852416936592853
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 766648047244476146, guid: 215f69c16ae48e6449787cb47432d458, type: 3}
+  - {fileID: 5286340657683524416, guid: 215f69c16ae48e6449787cb47432d458, type: 3}
+  - {fileID: -5048580617791963602, guid: dd79622408902d842918ae3c67d20fea, type: 3}
+  - {fileID: -5578237403883283956, guid: dd79622408902d842918ae3c67d20fea, type: 3}
+  - {fileID: -2903966385582138216, guid: c8a35a877f157b744acceb0458e75c58, type: 3}
+  - {fileID: 6365608141407672193, guid: c8a35a877f157b744acceb0458e75c58, type: 3}
+  - {fileID: 8015194060872597441, guid: a93cc7e8fa4c5364db3a9dbcbe5ecb3f, type: 3}
+  - {fileID: -8232162339024701189, guid: a93cc7e8fa4c5364db3a9dbcbe5ecb3f, type: 3}
+  - {fileID: 6806212276949370262, guid: 1219446d4fdec604596bd557a378e6f3, type: 3}
+  - {fileID: -8986852416936592853, guid: 1219446d4fdec604596bd557a378e6f3, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - paper_2_w_0
+  - paper_2_w_5
+  - paper_1_w_0
+  - paper_1_w_1
+  - paper_4_w_15
+  - paper_4_w_0
+  - paper_0_w_1
+  - paper_0_w_0
+  - paper_3_w_2
+  - paper_3_w_0
+  m_RenderDataMap: {}
+  m_Tag: BookUpgrades
+  m_IsVariant: 0
