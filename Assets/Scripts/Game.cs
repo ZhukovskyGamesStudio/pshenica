@@ -2,10 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_WEBGL
-using YG;
-#endif
-
 using Random = UnityEngine.Random;
 
 public class Game : MonoBehaviour {
@@ -166,35 +162,31 @@ public class Game : MonoBehaviour {
     }
 
     private void Upgrade(int what) {
-        Dictionary<string, string> eventParams = new Dictionary<string, string>();
         switch (what) {
             case 0: // hay
 
                 PshenicaSaveLoadManager.Profile.HayUpgrade++;
-                eventParams.Add("upgradeBought", "hay_" + PshenicaSaveLoadManager.Profile.HayUpgrade);
+                YGWrapper.SendYandexMetrica("upgradeBought", "hay_" + PshenicaSaveLoadManager.Profile.HayUpgrade);
 
                 SetHayLvl();
                 break;
             case 1: // book
 
                 PshenicaSaveLoadManager.Profile.BookUpgrade++;
-                eventParams.Add("upgradeBought", "book_" + PshenicaSaveLoadManager.Profile.BookUpgrade);
+                YGWrapper.SendYandexMetrica("upgradeBought", "book_" + PshenicaSaveLoadManager.Profile.BookUpgrade);
 
                 SetBookLvl();
                 break;
             case 2: // buttons
 
                 PshenicaSaveLoadManager.Profile.ButtonsUpgrade++;
-                eventParams.Add("upgradeBought", "buttons_" + PshenicaSaveLoadManager.Profile.ButtonsUpgrade);
+                YGWrapper.SendYandexMetrica("upgradeBought", "buttons_" + PshenicaSaveLoadManager.Profile.ButtonsUpgrade);
+
                 SetButtonsLvl();
                 break;
         }
 
         PshenicaSaveLoadManager.Save();
-
-#if UNITY_WEBGL
-        YandexMetrica.Send("upgradeBought", eventParams);
-#endif
 
         SoundManager.Instance.PlaySound(Sounds.Upgrade);
 
@@ -205,9 +197,7 @@ public class Game : MonoBehaviour {
 
         if (IsAllUpgradesBought) {
             SetTotalScore();
-#if UNITY_WEBGL
-            YandexMetrica.Send("allUpgradesBought", new Dictionary<string, string>() { { "allUpgradesBought", "true" } });
-#endif
+            YGWrapper.SendYandexMetrica("allUpgradesBought", "true" );
         }
     }
 
@@ -276,9 +266,7 @@ public class Game : MonoBehaviour {
         int saved = PlayerPrefs.GetInt("totalScore", 0);
         if (PshenicaSaveLoadManager.Profile.Xp > saved) {
             PlayerPrefs.SetInt("totalScore", PshenicaSaveLoadManager.Profile.Xp);
-#if UNITY_WEBGL
-            YandexGame.NewLeaderboardScores("totalScore", PshenicaSaveLoadManager.Profile.Xp);
-#endif
+            YGWrapper.SendLeaderboardScore("totalScore",PshenicaSaveLoadManager.Profile.Xp);
         }
     }
 
