@@ -18,7 +18,7 @@ MonoBehaviour:
   m_PlatformBuildProfile:
     rid: 7194536828619456515
   m_Scenes:
-  - m_enabled: 0
+  - m_enabled: 1
     m_path: Assets/Scenes/GameScene.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
