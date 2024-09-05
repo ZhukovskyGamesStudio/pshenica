@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+#if UNITY_WEBGL
 using YG;
+#endif
+
 using Random = UnityEngine.Random;
 
 public class Game : MonoBehaviour {

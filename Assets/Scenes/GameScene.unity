@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -338,7 +337,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &31259499
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -349,8 +348,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -709,7 +708,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &139852067
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -720,8 +719,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2007,7 +2006,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!50 &333340773
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2018,8 +2017,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2626,37 +2625,12 @@ MonoBehaviour:
   - {fileID: -247158500, guid: 802acb466d209114d9e24a21b8b8e9ef, type: 3}
   - {fileID: -1571104960, guid: 802acb466d209114d9e24a21b8b8e9ef, type: 3}
   - {fileID: 1543159050, guid: 802acb466d209114d9e24a21b8b8e9ef, type: 3}
-  books:
-  - {fileID: 1254879102}
-  - {fileID: 922975610}
-  - {fileID: 31259494}
-  - {fileID: 139852062}
-  - {fileID: 1141239302}
   _books:
   - {fileID: 1254879106}
   - {fileID: 922975616}
   - {fileID: 31259500}
   - {fileID: 139852068}
   - {fileID: 1141239308}
-  emptyBookSprites:
-  - {fileID: 21300000, guid: 3f664ff18c1f4394aadcac6534b898c7, type: 3}
-  - {fileID: 21300000, guid: 8dee432d9c1dafe429e062d0183a6ec0, type: 3}
-  - {fileID: 21300000, guid: b2ba81376fa789245ac160dbd3c5daea, type: 3}
-  - {fileID: 21300000, guid: fcd776816e84c0c489547e66d7a36bc4, type: 3}
-  - {fileID: 21300000, guid: 3452b7f48c2fed542b3e4a9a78600354, type: 3}
-  halfBookSprites:
-  - {fileID: 21300000, guid: 8fecad26c2d87d948afd74832c18d4a3, type: 3}
-  - {fileID: 21300000, guid: 686a54b0ccb9b5c488c58cf937a1e0db, type: 3}
-  - {fileID: 21300000, guid: ca483b0b6408c0843882049ef1fcde22, type: 3}
-  - {fileID: 21300000, guid: 2c0fdc494acf952418cd48ae16b70bf5, type: 3}
-  - {fileID: 21300000, guid: 4a948a33a14b39144bff01bbf54bd728, type: 3}
-  finishedBookSprites:
-  - {fileID: 21300000, guid: 1f95473b48bda254f8539024c35a5811, type: 3}
-  - {fileID: 21300000, guid: 8642f76fef649414d88ef24fa748b021, type: 3}
-  - {fileID: 21300000, guid: c17dc1b4ef53ae14d87565157b7dd6a4, type: 3}
-  - {fileID: 21300000, guid: 204f8af709652f2458431d8f9e9cba42, type: 3}
-  - {fileID: 21300000, guid: ce50607dfcac71e48b03704f7a10047d, type: 3}
-  curBook: {fileID: 1254879102}
   lvlText: {fileID: 772599812}
   xpSlider: {fileID: 1982375397}
   UpgradeHayButton: {fileID: 799565132}
@@ -3706,7 +3680,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &922975615
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3717,8 +3691,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4491,7 +4465,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &1141239307
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4502,8 +4476,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4834,7 +4808,7 @@ GameObject:
   m_IsActive: 0
 --- !u!50 &1254879103
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4845,8 +4819,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_IncludeLayers:
