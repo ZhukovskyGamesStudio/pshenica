@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PshenicaSaveLoadManager : SaveLoadManager<PshenicaSaveProfile> {
+public class PshenicaSaveLoadManager : SaveLoadManager<PshenicaSaveLoadManager,PshenicaSaveProfile> {
     [SerializeField]
     private MainGameConfig _mainGameConfig;
 

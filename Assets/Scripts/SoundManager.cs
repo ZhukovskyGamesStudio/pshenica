@@ -13,6 +13,10 @@ public class SoundManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+#if UNITY_ANDROID
+       _volumeSlider.gameObject.SetActive(false);
+        UpdateVolume(1)
+#endif
     }
 
     private void Start() {
