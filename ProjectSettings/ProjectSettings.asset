@@ -731,9 +731,9 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: YG_PLUGIN_YANDEX_GAME
+    Android: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2
     Standalone: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2
-    WebGL: YG_PLUGIN_YANDEX_GAME
+    WebGL: YG_PLUGIN_YANDEX_GAME;PLUGIN_YG_2;TMP_YG2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -15,7 +15,7 @@ public class SoundManager : MonoBehaviour {
         Instance = this;
 #if UNITY_ANDROID
        _volumeSlider.gameObject.SetActive(false);
-        UpdateVolume(1)
+       UpdateVolume(1);
 #endif
     }
 
