@@ -13,13 +13,14 @@ public class SoundManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-#if UNITY_ANDROID
-       _volumeSlider.gameObject.SetActive(false);
-       UpdateVolume(1);
-#endif
     }
 
     private void Start() {
+#if UNITY_ANDROID
+        _volumeSlider.gameObject.SetActive(false);
+        UpdateVolume(1);
+        return;
+#endif
         _volumeSlider.SetValueWithoutNotify(PshenicaSaveLoadManager.Profile.Volume);
         UpdateVolume(_volumeSlider.value);
     }
