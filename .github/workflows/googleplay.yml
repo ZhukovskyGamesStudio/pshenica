@@ -2,7 +2,7 @@ name: Build and Deploy Unity Game to Google Play
 on:
   workflow_dispatch:
 jobs:
-  release:
+  deploy:
     uses: zhukovskygamesstudio/workflows/.github/workflows/googleplay.yml@main 
     with:
       unity_version:  ${{ vars.UNITY_VERSION }}
